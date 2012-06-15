@@ -86,3 +86,17 @@ second (_, x, _) = x
 
 third :: (a, b, c) -> c
 third (_, _, x) = x
+
+head' :: [a] -> a
+head' [] = error "Can't call head on an empty list"
+head' (x:_) = x
+
+tell :: Show a => [a] -> String
+tell [] = "The list is empty"
+tell (x:[]) = "The list has one element: " ++ show x
+tell (x:y:[]) = "The list has two elements: " ++ show x ++ " " ++ show y
+tell (x:y:_) = "The list has many elements: " ++ show x ++ " " ++ show y
+
+firstLetter :: String -> String
+firstLetter "" = "Empty string, whoops!"
+firstLetter all@(x:xs) = "all:" ++ all ++ " first:" ++ [x]
