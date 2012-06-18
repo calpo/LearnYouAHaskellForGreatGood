@@ -100,3 +100,21 @@ tell (x:y:_) = "The list has many elements: " ++ show x ++ " " ++ show y
 firstLetter :: String -> String
 firstLetter "" = "Empty string, whoops!"
 firstLetter all@(x:xs) = "all:" ++ all ++ " first:" ++ [x]
+
+bmiTell :: Double -> Double -> String
+bmiTell weight height
+	| bmi <= 18.5	= show bmi ++ " You're underweight, you emo, you!"
+	| bmi <= 27.0	= show bmi ++ " You're supposedly normal."
+	| otherwise		= show bmi ++ " You're whale"
+	where bmi = weight / height ^ 2
+
+max' :: Ord a => a -> a -> a
+max' a b
+	| a <= b	= b
+	| otherwise = a
+
+myCompare :: Ord a => a -> a -> Ordering
+a `myCompare` b
+	| a == b	= EQ
+	| a < b		= LT
+	| otherwise = GT
