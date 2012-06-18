@@ -9,8 +9,8 @@ doubleUs x y = doubleMe x + doubleMe y
 --doubleSmallNumber :: Num a => a -> a
 doubleSmallNumber :: Int -> Int
 doubleSmallNumber x = if x > 100
-						then x
-						else x*2
+                        then x
+                        else x*2
 
 doubleSmallNumber' :: Int -> Int
 doubleSmallNumber' x = doubleSmallNumber x + 1
@@ -101,20 +101,34 @@ firstLetter :: String -> String
 firstLetter "" = "Empty string, whoops!"
 firstLetter all@(x:xs) = "all:" ++ all ++ " first:" ++ [x]
 
-bmiTell :: Double -> Double -> String
-bmiTell weight height
-	| bmi <= 18.5	= show bmi ++ " You're underweight, you emo, you!"
-	| bmi <= 27.0	= show bmi ++ " You're supposedly normal."
-	| otherwise		= show bmi ++ " You're whale"
-	where bmi = weight / height ^ 2
-
 max' :: Ord a => a -> a -> a
 max' a b
-	| a <= b	= b
-	| otherwise = a
+    | a <= b    = b
+    | otherwise = a
 
 myCompare :: Ord a => a -> a -> Ordering
 a `myCompare` b
-	| a == b	= EQ
-	| a < b		= LT
-	| otherwise = GT
+    | a == b    = EQ
+    | a < b     = LT
+    | otherwise = GT
+
+bmiTell :: Double -> Double -> String
+bmiTell weight height
+    | bmi <= skiny  = show bmi ++ " You're underweight, you emo, you!"
+    | bmi <= normal = show bmi ++ " You're supposedly normal."
+    | bmi <= fat    = show bmi ++ " You're fat."
+    | otherwise     = show bmi ++ " You're flesh meet."
+    where   bmi = weight / height ^ 2
+            skiny   = 18.5
+            normal  = 25.0
+            fat     = 30.0
+
+badGreeting :: String
+badGreeting = "huh.."
+
+niceGreeting :: String
+niceGreeting = "Hello"
+
+greet :: String -> String
+greet "Juan" = niceGreeting ++ " Juan."
+greet name = badGreeting ++ " " ++ name ++ "."
