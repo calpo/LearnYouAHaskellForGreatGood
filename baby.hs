@@ -112,17 +112,6 @@ a `myCompare` b
     | a < b     = LT
     | otherwise = GT
 
-bmiTell :: Double -> Double -> String
-bmiTell weight height
-    | bmi <= skiny  = show bmi ++ " You're underweight, you emo, you!"
-    | bmi <= normal = show bmi ++ " You're supposedly normal."
-    | bmi <= fat    = show bmi ++ " You're fat."
-    | otherwise     = show bmi ++ " You're flesh meet."
-    where   bmi = weight / height ^ 2
-            skiny   = 18.5
-            normal  = 25.0
-            fat     = 30.0
-
 badGreeting :: String
 badGreeting = "huh.."
 
@@ -132,3 +121,25 @@ niceGreeting = "Hello"
 greet :: String -> String
 greet "Juan" = niceGreeting ++ " Juan."
 greet name = badGreeting ++ " " ++ name ++ "."
+
+initials :: String -> String -> String
+initials firstname lastname = [f] ++ ". " ++ [l] ++ "."
+    where   (f:_) = firstname
+            (l:_) = lastname
+
+initials' :: String -> String -> String
+initials' (f:_) (l:_) = [f] ++ ". " ++ [l] ++ "."
+
+bmiTell :: Double -> Double -> String
+bmiTell weight height
+    | bmi <= skiny  = show bmi ++ " You're underweight, you emo, you!"
+    | bmi <= normal = show bmi ++ " You're supposedly normal."
+    | bmi <= fat    = show bmi ++ " You're fat."
+    | otherwise     = show bmi ++ " You're flesh meet."
+    where   bmi = weight / height ^ 2
+            (skiny, normal, fat) = (18.5, 25.0, 30.0)
+
+calcBmis :: [(Double, Double)] -> [Double]
+calcBmis xs = [bmi w h | (w, h) <- xs]
+    where   bmi w h = w / h ^ 2
+-- calcBmis (zip [50,55..80] [1.73,1.73,1.73,1.73,1.73,1.73,1.73])
