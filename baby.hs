@@ -152,7 +152,7 @@ bmiTell weight height
 calcBmis :: [(Double, Double)] -> [Double]
 calcBmis xs = [bmi w h | (w, h) <- xs]
     where   bmi w h = w / h ^ 2
--- calcBmis (zip [50,55..80] [1.73,1.73,1.73,1.73,1.73,1.73,1.73])
+-- calcBmis (zip [50,55..80] (replicate 7 1.73))
 
 cylinder :: Double -> Double -> Double
 cylinder r h =
