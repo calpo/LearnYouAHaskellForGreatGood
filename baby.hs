@@ -91,6 +91,10 @@ head' :: [a] -> a
 head' [] = error "Can't call head on an empty list"
 head' (x:_) = x
 
+head'' :: [a] -> a
+head'' xs = case xs of [] -> error "No head for empty lists."
+                       (x:_) -> x
+
 tell :: Show a => [a] -> String
 tell [] = "The list is empty"
 tell (x:[]) = "The list has one element: " ++ show x
@@ -122,6 +126,12 @@ greet :: String -> String
 greet "Juan" = niceGreeting ++ " Juan."
 greet name = badGreeting ++ " " ++ name ++ "."
 
+greet' :: String -> String
+greet' name = case name of  "Juan" -> niceGreeting ++ " Juan."
+                            name -> badGreeting ++ " " ++ name ++ "."
+    where   niceGreeting = "Hello"
+            badGreeting = "huh.."
+
 initials :: String -> String -> String
 initials firstname lastname = [f] ++ ". " ++ [l] ++ "."
     where   (f:_) = firstname
@@ -143,3 +153,24 @@ calcBmis :: [(Double, Double)] -> [Double]
 calcBmis xs = [bmi w h | (w, h) <- xs]
     where   bmi w h = w / h ^ 2
 -- calcBmis (zip [50,55..80] [1.73,1.73,1.73,1.73,1.73,1.73,1.73])
+
+cylinder :: Double -> Double -> Double
+cylinder r h =
+    let sideArea = 2 * pi * r * h
+        topArea = pi * r ^ 2
+    in  sideArea + 2 * topArea
+
+calcBmis' :: [(Double, Double)] -> [Double]
+calcBmis' xs = [bmi | (w, h) <- xs, let bmi = w / h ^ 2, bmi > 20]
+
+describeList :: [a] -> String
+describeList ls = "The list is "
+                    ++ case ls of   [] -> "empty"
+                                    [x] -> "single"
+                                    xs -> "long"
+
+describeList' :: [a] -> String
+describeList' ls = "The list is " ++ what ls
+    where   what [] = "empty"
+            what [x] = "single"
+            what xs = "long"
