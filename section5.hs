@@ -61,3 +61,28 @@ chain n
 numLongChains :: Int
 numLongChains = length (filter isLong (map chain [1..100]))
     where isLong xs = length xs > 15
+
+numLongChains' :: Int
+numLongChains' = length (filter (\xs -> length xs > 15) (map chain [1..100]))
+
+addThree :: Int -> Int -> Int -> Int
+addThree x y z = x + y + z
+
+addThree' :: Int -> Int -> Int -> Int
+addThree' = (\x -> (\y -> (\z -> x + y + z)))
+
+addOne :: Int -> Int
+addOne = \x -> x
+
+addTwo :: Int -> Int -> Int
+addTwo = \x -> (\y -> x + y)
+
+addTwo' :: Int -> Int -> Int
+addTwo' x = \y -> x + y
+
+flip''' :: (a -> b -> c) -> b -> a -> c
+flip''' f = \x y -> f y x
+
+flip'''' :: (a -> b -> c) -> b -> a -> c
+--flip'''' f = \x -> \y -> f y x
+flip'''' = \f x y -> f y x
