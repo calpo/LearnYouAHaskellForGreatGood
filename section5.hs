@@ -63,7 +63,8 @@ numLongChains = length (filter isLong (map chain [1..100]))
     where isLong xs = length xs > 15
 
 numLongChains' :: Int
-numLongChains' = length (filter (\xs -> length xs > 15) (map chain [1..100]))
+--numLongChains' = length (filter (\xs -> length xs > 15) (map chain [1..100]))
+numLongChains' = length $ filter (\xs -> length xs > 15) $ map chain [1..100]
 
 addThree :: Int -> Int -> Int -> Int
 addThree x y z = x + y + z
@@ -122,3 +123,17 @@ foldtest = foldr (\x acc -> if x > 1000000 then True else acc) False
 -- Warning 起こるので先頭のオプションコメントアウト
 sqrtSums :: Int
 sqrtSums = length (takeWhile (<1000) (scanl1 (+) (map sqrt [1..]))) + 1
+
+oddSquareSum :: Integer
+--oddSquareSum = sum (takeWhile (<10000) (filter odd (map (^2) [1..])))
+--oddSquareSum = sum . takeWhile (<10000) . filter odd $ map (^2) [1..]
+oddSquareSum = (sum . takeWhile (<10000) . filter odd) (map (^2) [1..])
+
+--dottest = replicate 2 (product (map (*3) (zipWith max [4,2] [1,5])))
+dottest = replicate 2 $ product $ map (*3) $ zipWith max [4,2] [1,5]
+
+dottest' xs ys = replicate 2 . product . map (*3) $ zipWith max xs ys
+
+--fn x = ceiling (negate (tan (cos (max 50 x))))
+fn = ceiling . negate .tan . cos . max 50
+
