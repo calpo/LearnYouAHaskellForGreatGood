@@ -21,3 +21,12 @@ encode offset = map $ chr . (+offset) . ord
 
 decode :: Int -> String -> String
 decode shift msg = encode (negate shift) msg
+
+digitSum :: Int -> Int
+digitSum = sum . map digitToInt . show
+
+findTo40 :: Maybe Int
+findTo40 = find (\x -> digitSum x == 40) [1..]
+
+findTo :: Int -> Maybe Int
+findTo num = find (\x -> digitSum x == num) [1..]
