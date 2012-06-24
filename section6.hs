@@ -1,8 +1,8 @@
-{-# OPTIONS -Wall -Werror #-}
+-- {-# OPTIONS -Wall -Werror #-}
 
---import qualified Data.List as L
 import Data.List
 import Data.Char
+import qualified Data.Map as M
 
 numUniques :: Eq a => [a] -> Int
 numUniques = length . nub
@@ -31,11 +31,11 @@ findTo40 = find (\x -> digitSum x == 40) [1..]
 findTo :: Int -> Maybe Int
 findTo num = find (\x -> digitSum x == num) [1..]
 
-phoneBook :: [(String,String)]
-phoneBook =
-    [("betty", "111-222")
-    ,("hoge", "333-444")
-    ,("fuga","555-666")
+phoneBook' :: [(String,String)]
+phoneBook' = [
+         ("betty", "111-222")
+        ,("hoge", "333-444")
+        ,("fuga","555-666")
     ]
 
 findByKey'' :: Eq k => k -> [(k,v)] -> v
@@ -52,3 +52,15 @@ findByKey' key xs = foldr
                         (\(k,v) acc -> if k == key then Just v else acc)
                         Nothing
                         xs
+
+
+phoneBook :: M.Map String String
+phoneBook = M.fromList $
+    [("betty", "111-222")
+    ,("hoge", "333-444")
+    ,("fuga","555-666")
+    ]
+
+string2digit :: String -> [Int]
+--string2digit xs = map digitToInt $ filter isDigit xs
+string2digit = map digitToInt . filter isDigit
