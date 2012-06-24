@@ -30,3 +30,25 @@ findTo40 = find (\x -> digitSum x == 40) [1..]
 
 findTo :: Int -> Maybe Int
 findTo num = find (\x -> digitSum x == num) [1..]
+
+phoneBook :: [(String,String)]
+phoneBook =
+    [("betty", "111-222")
+    ,("hoge", "333-444")
+    ,("fuga","555-666")
+    ]
+
+findByKey'' :: Eq k => k -> [(k,v)] -> v
+findByKey'' key = snd . head . filter (\(k,_) -> key == k)
+
+findByKey :: Eq k => k -> [(k,v)] -> Maybe v
+findByKey _ [] = Nothing
+findByKey key ((k,v):xs)
+    | k == key  = Just v
+    | otherwise = findByKey key xs
+
+findByKey' :: Eq k => k -> [(k,v)] -> Maybe v
+findByKey' key xs = foldr
+                        (\(k,v) acc -> if k == key then Just v else acc)
+                        Nothing
+                        xs
